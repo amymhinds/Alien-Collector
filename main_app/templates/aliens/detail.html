@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Alien Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ alien.name }}</span>
+    <p>Planet: {{ alien.planet }}</p>
+    <p>Description: {{ alien.description }}</p>
+    {% if alien.age > 0 %}
+      <p>Age: {{ alien.age }}</p>
+    {% else %}
+      <p>Age: Baby Alien</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
