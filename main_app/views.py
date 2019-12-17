@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Alien
-
+from .forms import TestSubjectsForm
 
 # class Alien:  # Note that parens are optional if not inheriting from another class
 #   def __init__(self, name, planet, description, age):
@@ -28,7 +28,21 @@ def aliens_index(request):
 
 def aliens_detail(request, alien_id):
   alien = Alien.objects.get(id=alien_id)
-  return render(request, 'aliens/detail.html', { 'alien': alien })
+  testsubjects_form = TestSubjectsForm()
+  return render(request, 'aliens/detail.html', { 'alien': alien,
+   'testsubjects_form': testsubjects_form})
+
+def add_testsubject(request, alien_id):
+  # create the ModelForm using the data in request.POST
+  form = TestSubjectsForm(request.POST)
+  # validate the form
+  if form.is_valid():
+    # don't save the form to the db until it
+    # has the cat_id assigned
+    new_testsubject = form.save(commit=False)
+    new_testsubject.alien_id = alien_id
+    new_testsubject.save()
+  return redirect('detail', alien_id=alien_id)
 
 class AlienCreate(CreateView):
   model = Alien

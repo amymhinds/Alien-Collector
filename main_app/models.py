@@ -14,4 +14,12 @@ class Alien(models.Model):
   def get_absolute_url(self):
       return reverse('detail', kwargs={'alien_id': self.id})
 
+class TestSubjects(models.Model):
+  subject_type = models.CharField(max_length=50)
+  experiment = models.CharField(max_length=50)
+
+  alien = models.ForeignKey(Alien, on_delete=models.CASCADE)
+  def __str__(self):
+    return f"{self.experiment} on {self.subject_type}"
+
 
