@@ -33,6 +33,13 @@ class TestSubjects(models.Model):
   def __str__(self):
     return f"{self.experiment} on {self.subject_type}"
 
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    alien = models.ForeignKey(Alien, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for alien_id: {self.alien_id} @{self.url}"
+
 
 
 
