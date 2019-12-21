@@ -17,5 +17,5 @@ urlpatterns = [
     path('ufos/<int:pk>/delete/', views.UfoDelete.as_view(), name='ufos_delete'),
     path('aliens/<int:alien_id>/assoc_ufo/<int:ufo_id>/', views.assoc_ufo, name='assoc_ufo'),
     path('aliens/<int:alien_id>/add_photo/', views.add_photo, name='add_photo'),
-
+    path('accounts/signup/', views.signup, name='signup'),
 ]

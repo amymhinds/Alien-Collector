@@ -20,10 +20,16 @@
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
-          <li><a href="{% url 'ufos_create' %}">Add a UFO</a></li>
-          <li><a href="{% url 'ufos_index' %}">View All UFOs</a></li>
-          <li><a href="{% url 'aliens_create' %}">Add an Alien</a></li>
-          <li><a href="/aliens">View All My Aliens</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'ufos_create' %}">Add a UFO</a></li>
+            <li><a href="{% url 'ufos_index' %}">View All UFOs</a></li>
+            <li><a href="{% url 'aliens_create' %}">Add an Alien</a></li>
+            <li><a href="/aliens">View All My Aliens</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
